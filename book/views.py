@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from author.models import Author
 from book.models import Book
 from order.models import Order
+from .forms import BookForm
 
 TEMPLATE_DIRS = 'os.path.join(BASE_DIR,"templates")'
 
@@ -39,3 +40,33 @@ def book_info(request, book_id):
     book = Book.objects.filter(id=book_id)
     order = Order.objects.filter(book=book_id)
     return render(request, 'book_info.html', context={'book': book, 'order': order})
+
+
+def add_book(request, author_id):
+    if request.method == 'GET':
+        form = BookForm()
+        return render(request, 'book_form.html', context={'form': form})
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+    if form.is_valid():
+        form.save()
+    return redirect('main')
+
+
+def edit_book(request, book_id):
+    if request.method == 'GET':
+        book = Book.objects.get(pk=book_id)
+        form = BookForm(instance=book)
+        return render(request, 'book_form.html', context={'form': form})
+    if request.method == "POST":
+        book = Book.objects.get(pk=book_id)
+        form = BookForm(request.POST, instance=book)
+    if form.is_valid():
+        form.save()
+    return redirect('book info', book_id=book_id)
+
+
+def delete_book(request, book_id):
+    author = Book.objects.get(pk=book_id)
+    author.delete()
+    return redirect('main')

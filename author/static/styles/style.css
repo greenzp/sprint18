@@ -7,6 +7,14 @@ a{
   text-decoration: none;
   font-style: italic;
 }
+form{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+#div_id_name{
+  width: 500px;
+}
 .col-lg-4{
   margin-top: 80px;
   display: flex;

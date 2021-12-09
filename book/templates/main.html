@@ -11,6 +11,7 @@
     </div>
     <div class="col-lg-4">
       <h3>Authors</h3>
+      <a class="btn btn-primary add_author" href="{%url 'add author'%}" role="button">Add Author</a>
       {%for author in authors%}
       <a href="{%url 'author info' author.id%}">{{author.name}} {{author.surname}} {{author.patronymic}}</a>
       {% endfor %}

@@ -15,6 +15,8 @@
   <p>Last Ordered:</p>
   {%for order in order%}
   <p>{{order.created_at}} by <a href="{%url 'user info' order.user.id%}">{{order.user.first_name}}</a> {%endfor%}</p>
+  <a class="btn btn-primary edit_author" href="{%url 'edit book' book.id%}" role="button">Edit Book</a>
+  <a class="btn btn-danger delete_author" href="{%url 'delete book' book.id%}" role="button">Delete Book</a>
   {% endfor %}
   <a class="btn btn-primary" href="{%url 'all books'%}" role="button">Show all books</a>
 </div>
