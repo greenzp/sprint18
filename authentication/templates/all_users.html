@@ -1,0 +1,24 @@
+{%extends 'head.html'%}
+{%block body%}
+<div class="container-fluid">
+  <h1>All users in our library</h1>
+  <a class="btn btn-primary" href="{%url 'main'%}" role="button">Main page</a>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <h3>Users</h3>
+      {%for user in users%}
+      <a href="{%url 'user info' user.id%}">{{user.first_name}} {{user.middle_name}} {{user.last_name}}</a>
+      {% endfor %}
+    </div>
+    <div class="col-lg-6">
+      <h3>Users who does not hand over books on time</h3>
+      {%for order in orders%}
+      <p><a href="{%url 'user info' order.user.id%}">{{order.user.first_name}} {{order.user.middle_name}} {{order.user.last_name}}</a>
+        with <a href="{%url 'order info' order.id%}">order</a> on<a href="{%url 'book info' order.book.id%}"> {{order.book.name}}</a>
+      </p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{%endblock%}

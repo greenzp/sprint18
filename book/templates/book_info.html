@@ -1,0 +1,21 @@
+{%extends 'head.html'%}
+{%block body%}
+<div class="container-fluid">
+  <a class="btn btn-primary" href="{%url 'main'%}" role="button">Main page</a>
+
+  {% for book in book %}
+  <h1>Information about book</h1>
+  <p>Book name: {{book.name}}</p>
+  <p>Description:</p>
+  <p>{{book.description}}</p>
+  {%for n in book.authors.all.values%}
+  <p>Author: <a href="{%url 'author info' n.id%}"> {{n.name}} {{n.surname}} </a></p>
+  {%endfor%}
+  <p>Count: {{book.count}}</p>
+  <p>Last Ordered:</p>
+  {%for order in order%}
+  <p>{{order.created_at}} by <a href="{%url 'user info' order.user.id%}">{{order.user.first_name}}</a> {%endfor%}</p>
+  {% endfor %}
+  <a class="btn btn-primary" href="{%url 'all books'%}" role="button">Show all books</a>
+</div>
+{%endblock%}

@@ -1,0 +1,27 @@
+{%extends 'head.html'%}
+{%block body%}
+<div class="container-fluid">
+  <h1>Here you can see all Books in Library and sort them</h1>
+  <a class="btn btn-primary" href="{%url 'main'%}" role="button">Main page</a>
+
+  <div class="container">
+    <div class="sort-name">
+      <h2>Sort by Book name</h2>
+      <a class="btn btn-outline-primary" href="{%url 'sort books' 1%}" role="button">Asc</a>
+      <a class="btn btn-outline-primary" href="{%url 'sort books' 2%}" role="button">Desc</a>
+    </div>
+    <div class="sort-count">
+      <h2>Sort by Book count</h2>
+      <a class="btn btn-outline-primary" href="{%url 'sort books' 3%}" role="button">Asc</a>
+      <a class="btn btn-outline-primary" href="{%url 'sort books' 4%}" role="button">Desc</a>
+    </div>
+
+    {% for book in books%}
+      <a href="{%url 'book info' book.id%}">{{book.name}} by {%for n in book.authors.all.values%} {{n.name}} {{n.surname}} {%endfor%} ({{book.count}})pc.</a>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+{%endblock%}

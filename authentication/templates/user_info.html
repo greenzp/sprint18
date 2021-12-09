@@ -1,0 +1,20 @@
+{%extends 'head.html'%}
+{%block body%}
+  <div class="container-fluid">
+    <a class="btn btn-primary" href="{%url 'main'%}" role="button">Main page</a>
+
+    {% for user in user%}
+    <h1>Information about user</h1>
+    <p>First name: {{user.first_name}}</p>
+    <p>Middle name: {{user.first_name}}</p>
+    <p>Last name: {{user.last_name}}</p>
+    <p>Date of join: {{user.created_at}}</p>
+    <h5>Books that user has read</h5>
+    {%for order in orders%}
+    <p>{{order.book.name}} by {%for n in order.book.authors.all.values%} {{n.name}} {{n.surname}} {{n.patronymic}}</p>
+    {% endfor %}
+    {% endfor %}
+    {% endfor %}
+    <a class="btn btn-primary" href="{%url 'all users'%}" role="button">Show all users</a>
+  </div>
+{%endblock%}

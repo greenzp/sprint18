@@ -1,0 +1,18 @@
+{%extends 'head.html'%}
+{%block body%}
+<div class="container-fluid">
+  <a class="btn btn-primary" href="{%url 'main'%}" role="button">Main page</a>
+  {% for order in order %}
+  <h1>Information about order</h1>
+  <p>ID:{{order.id}}</p>
+  <p>Book name: {{order.book.name}}</p>
+  <p>Created at:</p>
+  <p>{{order.created_at}} by <a href="{%url 'user info' order.user.id%}">{{order.user.first_name}}</a></p>
+  <p>Ended at:</p>
+  <p>{{order.end_at}}</p>
+  <p>Plated at:</p>
+  <p>{{order.plated_end_at}}</p>
+  <a class="btn btn-primary" href="{%url 'all orders'%}" role="button">Show all orders</a>
+  {%endfor%}
+</div>
+{%endblock%}

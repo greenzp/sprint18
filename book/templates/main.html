@@ -1,0 +1,26 @@
+{%extends 'head.html'%}
+{%block body%}
+<div class="container-fluid">
+  <h1>Welcome to our library</h1>
+  <div class="row">
+    <div class="col-lg-4">
+      <h3><a class="heding"href="{%url 'all books'%}">All Books</a></h3>
+        {% for book in books %}
+        <a href="{%url 'book info' book.id%}">{{book.name}} by {%for n in book.authors.all.values%} {{n.name}} {{n.surname}} {%endfor%} ({{book.count}})pc.</a>
+        {% endfor %}
+    </div>
+    <div class="col-lg-4">
+      <h3>Authors</h3>
+      {%for author in authors%}
+      <a href="{%url 'author info' author.id%}">{{author.name}} {{author.surname}} {{author.patronymic}}</a>
+      {% endfor %}
+    </div>
+    <div class="col-lg-4">
+      <h3>Orders</h3>
+      {%for order in orders%}
+      <p><a href="{%url 'user info' order.user.id%}">{{order.user.first_name}}</a> ordered <a href="{%url 'book info' order.book.id%}">{{order.book.name}}</a></p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{%endblock%}

@@ -1,0 +1,16 @@
+{%extends 'head.html'%}
+{%block body%}
+<div class="container-fluid">
+  {% for author in authors %}
+  <h1>Information about Author</h1>
+  <p>Author name: {{author.name}} {{author.surname}} {{author.patronymic}}</p>
+  <p>Author Books:</p>
+  {%for n in author.books.all.values%}
+  <ul>
+    <li><a href="{%url 'book info' n.id %}">{{n.name}}</a></li>
+  </ul>
+  {%endfor%}
+  {%endfor%}
+  <a class="btn btn-primary" href="{%url 'main'%}" role="button">Main page</a>
+</div>
+{%endblock%}
