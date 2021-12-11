@@ -1,25 +1,18 @@
-{%extends 'head.html'%}
-{%block body%}
-<div class="container-fluid">
-  <h1>All orders in our library</h1>
-  <a class="btn btn-primary" href="{%url 'main'%}" role="button">Main page</a>
-  <div class="row">
-    <div class="col-lg-6">
-      <h3>Orders by create</h3>
-      {%for order in orders_create%}
-      <p>User: <a href="{%url 'user info' order.user.id%}">{{order.user.first_name}}</a></p>
-      <p>Ordered:<a href="{%url 'book info' order.book.id%}">{{order.book.name}}</a></p>
-      <a class="btn btn-primary" href="{%url 'order info' order.id%}" role="button">Show info</a>
-      {% endfor %}
-    </div>
-    <div class="col-lg-6">
-      <h3>Orders by plated</h3>
-      {%for order in orders_plated%}
-      <p>User: <a href="{%url 'user info' order.user.id%}">{{order.user.first_name}}</a></p>
-      <p>Ordered:<a href="{%url 'book info' order.book.id%}">{{order.book.name}}</a></p>
-      <a class="btn btn-primary" href="{%url 'order info' order.id%}" role="button">Show info</a>
-      {% endfor %}
-    </div>
-  </div>
-</div>
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% load render_table from django_tables2 %}
+
+{%block content%}
+    <h1>Here we can see all orders</h1>
+
+    {% if filter %}
+        <form action="" method="get" class="form form-inline">
+            {% bootstrap_form filter.form layout='inline' %}
+            {% bootstrap_button 'filter' %}
+        </form>
+    {% endif %}
+
+    {% render_table table %}
+    <a class="btn btn-primary" href="{%url 'order_form' %}" role="button">Create order</a>
 {%endblock%}

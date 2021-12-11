@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block extra_head %}
+{{ form.media }}
+{% endblock %}
+
+
+{% block bootstrap4_title %}
+    Add order
+{% endblock %}
+
+{% block content %}
+<h1>Add order</h1>
+<div class="center">
+  {% crispy form %}
+</div>
+
+{% endblock %}
