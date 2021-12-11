@@ -17,7 +17,7 @@
       {% endfor %}
     </div>
     <div class="col-lg-4">
-      <h3>Orders</h3>
+      <h3><a class="heding"href="{%url 'all_orders'%}">All orders</a></h3>
       {%for order in orders%}
       <p><a href="{%url 'user info' order.user.id%}">{{order.user.first_name}}</a> ordered <a href="{%url 'book info' order.book.id%}">{{order.book.name}}</a></p>
       {% endfor %}

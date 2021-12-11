@@ -1,6 +1,7 @@
 from django.db import models, IntegrityError, DataError
 
 from author.models import Author
+from django.db.models import Count, Q, F
 
 
 class Book(models.Model):
@@ -28,7 +29,8 @@ class Book(models.Model):
         Magic method is redefined to show all information about Book.
         :return: book id, book name, book description, book count, book authors
         """
-        return str(self.to_dict())[1:-1]
+        authors = ", ".join([str(a) for a in self.authors.all()])
+        return str(f'{self.name} | {authors}')
 
     def __repr__(self):
         """
@@ -161,3 +163,8 @@ class Book(models.Model):
         """
         all_users = Book.objects.all()
         return list(all_users)
+
+    @staticmethod
+    def get_free_books():
+        non_returned = Count('order', filter=Q(order__end_at__isnull=True))
+        return Book.objects.annotate(non_returned=non_returned).filter(count__gt=F("non_returned"))

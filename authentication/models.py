@@ -56,7 +56,7 @@ class CustomUser(AbstractBaseUser):
                  user email, user password, user updated_at, user created_at,
                  user role, user is_active
         """
-        return str(self.to_dict())[1:-1]
+        return str(f'{self.first_name} {self.last_name}')
 
     def __repr__(self):
         """

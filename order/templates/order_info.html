@@ -1,8 +1,8 @@
-{%extends 'head.html'%}
-{%block body%}
+{%extends 'base.html'%}
+{%block content%}
 <div class="container-fluid">
   <a class="btn btn-primary" href="{%url 'main'%}" role="button">Main page</a>
-  {% for order in order %}
+
   <h1>Information about order</h1>
   <p>ID:{{order.id}}</p>
   <p>Book name: {{order.book.name}}</p>
@@ -12,7 +12,9 @@
   <p>{{order.end_at}}</p>
   <p>Plated at:</p>
   <p>{{order.plated_end_at}}</p>
-  <a class="btn btn-primary" href="{%url 'all orders'%}" role="button">Show all orders</a>
-  {%endfor%}
+
+  <a class="btn btn-primary" href="{%url 'all_orders'%}" role="button">Show all orders</a>
+  <a class="btn btn-primary order_edit" href="{%url 'order_edit' order.id%}" role="button">Edit order</a>
+  <a class="btn btn-danger order_delete" href="{%url 'order_delete' order.id%}" role="button">Delete order</a>
 </div>
 {%endblock%}

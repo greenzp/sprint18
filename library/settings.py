@@ -42,7 +42,11 @@ INSTALLED_APPS = [
     'author',
     'book',
     'order',
-    'crispy_forms'
+    'bootstrap4',
+    'crispy_forms',
+    'django_tables2',
+    'django_filters',
+    'bootstrap_datepicker_plus'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
