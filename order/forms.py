@@ -1,9 +1,10 @@
+from bootstrap_datepicker_plus.widgets import DatePickerInput
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from .models import Order
 from book.models import Book
-from bootstrap_datepicker_plus import DatePickerInput
+from bootstrap_datepicker_plus import *
 
 # from django.utils.translation import gettext_lazy as _
 

@@ -15,7 +15,7 @@
       <h3>Users who does not hand over books on time</h3>
       {%for order in orders%}
       <p><a href="{%url 'user info' order.user.id%}">{{order.user.first_name}} {{order.user.middle_name}} {{order.user.last_name}}</a>
-        with <a href="{%url 'order info' order.id%}">order</a> on<a href="{%url 'book info' order.book.id%}"> {{order.book.name}}</a>
+        with <a href="{%url 'order_info' order.id%}">order</a> on<a href="{%url 'book info' order.book.id%}"> {{order.book.name}}</a>
       </p>
       {% endfor %}
     </div>

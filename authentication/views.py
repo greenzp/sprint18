@@ -20,5 +20,4 @@ def user_info(request, user_id):
 def all_users(request):
     users = CustomUser.get_all()
     orders = Order.objects.filter(plated_end_at__gt=F('created_at') + timedelta(days=3, minutes=1)).order_by('user')
-    print(orders)
     return render(request, 'all_users.html', context={'users': users, 'orders': orders})
