@@ -5,7 +5,8 @@ from order.models import Order
 from .forms import BookForm
 
 from rest_framework import generics
-from book.serializers import BookDetailSerializer
+from book.serializers import BookDetailSerializer, BookListSerializer
+from book.models import Book
 TEMPLATE_DIRS = 'os.path.join(BASE_DIR,"templates")'
 
 
@@ -14,7 +15,9 @@ class BookCreateView(generics.CreateAPIView):
     serializer_class = BookDetailSerializer
 
 
-
+class BookListView(generics.ListAPIView):
+    serializer_class = BookListSerializer
+    queryset = Book.objects.all()
 
 
 

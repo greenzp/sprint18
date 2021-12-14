@@ -8,7 +8,7 @@ from .forms import AuthorForm
 
 
 from rest_framework import generics
-from author.serializers import AuthorDetailSerializer
+from author.serializers import AuthorDetailSerializer,AuthorListSerializer
 
 
 TEMPLATE_DIRS = 'os.path.join(BASE_DIR,"templates")'
@@ -18,7 +18,9 @@ class AuthorCreateView(generics.CreateAPIView):
     serializer_class = AuthorDetailSerializer
 
 
-
+class AuthorsListView(generics.ListAPIView):
+    serializer_class = AuthorListSerializer
+    queryset = Author.objects.all()
 
 
 
