@@ -6,7 +6,27 @@ from book.models import Book
 from order.models import Order
 from .forms import AuthorForm
 
+
+from rest_framework import generics
+from author.serializers import AuthorDetailSerializer
+
+
 TEMPLATE_DIRS = 'os.path.join(BASE_DIR,"templates")'
+
+
+class AuthorCreateView(generics.CreateAPIView):
+    serializer_class = AuthorDetailSerializer
+
+
+
+
+
+
+
+
+
+
+
 
 
 def author_info(request, author_id):

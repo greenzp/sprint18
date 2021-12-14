@@ -1,12 +1,33 @@
 from django.shortcuts import render, redirect
-
-# Create your views here.
 from author.models import Author
 from book.models import Book
 from order.models import Order
 from .forms import BookForm
 
+from rest_framework import generics
+from book.serializers import BookDetailSerializer
 TEMPLATE_DIRS = 'os.path.join(BASE_DIR,"templates")'
+
+
+
+class BookCreateView(generics.CreateAPIView):
+    serializer_class = BookDetailSerializer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def main_page(request):
