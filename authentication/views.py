@@ -1,23 +1,33 @@
-from datetime import timedelta
-
-from django.shortcuts import render
-from django.db.models import F
-# Create your views here.
-from author.models import Author
-from book.models import Book
+from django.shortcuts import get_object_or_404
 from order.models import Order
 from authentication.models import CustomUser
+from rest_framework import generics, status
+from .serializers import OrderSerializer, CustomUserSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
-TEMPLATE_DIRS = 'os.path.join(BASE_DIR,"templates")'
+
+class CustomUserView(generics.ListCreateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
 
 
-def user_info(request, user_id):
-    user = CustomUser.objects.filter(id=user_id)
+class CustomUserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+
+
+@api_view(['GET'])
+def user_order_list(request, user_id):
     orders = Order.objects.filter(user=user_id)
-    return render(request, 'user_info.html', context={'user': user, 'orders': orders})
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data)
 
 
-def all_users(request):
-    users = CustomUser.get_all()
-    orders = Order.objects.filter(plated_end_at__gt=F('created_at') + timedelta(days=3, minutes=1)).order_by('user')
-    return render(request, 'all_users.html', context={'users': users, 'orders': orders})
+@api_view(['GET'])
+def user_order_detail(request, user_id, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    if order in Order.objects.filter(user=user_id):
+        serializer = OrderSerializer(order)
+        return Response(serializer.data)
+    return Response(data={"detail": "Invalid order"}, status=status.HTTP_400_BAD_REQUEST)
